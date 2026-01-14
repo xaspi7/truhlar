@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
   <style>
-    :root {
+    :root{
       --bg-main:#020617;
       --bg-card:#111827;
       --bg-card-soft:#1f2937;
@@ -20,258 +20,765 @@
       --radius-lg:18px;
       --shadow-soft:0 18px 40px rgba(0,0,0,.9);
     }
-
     *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
     body{
       margin:0;
-      font-family:Montserrat,sans-serif;
-      background:#020617;
+      font-family:"Montserrat",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:radial-gradient(circle at top,#020617 0,#020617 40%,#020617 100%);
       color:var(--text-main);
       line-height:1.7
     }
-    a{text-decoration:none;color:inherit}
+    a{color:inherit;text-decoration:none}
     img{max-width:100%;display:block}
     .container{max-width:1160px;margin:0 auto;padding:0 20px}
 
     /* NAVBAR */
-    .navbar{position:sticky;top:0;z-index:50;background:rgba(2,6,23,.95);border-bottom:1px solid #1f2937}
-    .navbar-inner{display:flex;justify-content:space-between;align-items:center;padding:12px 20px}
-    .brand{display:flex;gap:10px;align-items:center;font-weight:600;text-transform:uppercase;font-size:.9rem}
-    .brand-mark{
-      width:30px;height:30px;border-radius:50%;
-      background:conic-gradient(#f59e0b,#fde68a,#f59e0b);
-      display:flex;align-items:center;justify-content:center;
-      color:#020617;font-weight:800
+    .navbar{
+      position:sticky;top:0;z-index:50;
+      background:rgba(2,6,23,.92);
+      backdrop-filter:blur(16px);
+      border-bottom:1px solid rgba(148,163,184,.28)
     }
-    .brand-sub{font-size:.7rem;color:var(--text-muted);letter-spacing:.18em}
+    .navbar-inner{
+      max-width:1160px;margin:0 auto;padding:12px 20px;
+      display:flex;align-items:center;justify-content:space-between;gap:16px;
+      position:relative
+    }
+    .brand{display:flex;align-items:center;gap:10px;font-size:.9rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+    .brand-mark{
+      width:30px;height:30px;border-radius:999px;
+      background:conic-gradient(from 220deg,#f59e0b,#fbbf24,#fde68a,#f59e0b);
+      display:flex;align-items:center;justify-content:center;
+      color:#020617;font-size:.8rem;font-weight:800;
+      box-shadow:0 12px 30px rgba(0,0,0,.9)
+    }
+    .brand-sub{font-size:.7rem;font-weight:400;letter-spacing:.18em;text-transform:uppercase;color:var(--text-muted)}
     .nav-links{display:flex;gap:22px;font-size:.9rem}
-    .nav-phone{border:1px solid #374151;padding:8px 14px;border-radius:999px;font-size:.88rem}
+    .nav-links a{position:relative;opacity:.8;padding-bottom:4px}
+    .nav-links a::after{
+      content:"";position:absolute;left:0;bottom:0;width:0;height:2px;
+      background:var(--accent);border-radius:999px;transition:width .16s ease-out
+    }
+    .nav-links a:hover{opacity:1}
+    .nav-links a:hover::after{width:100%}
+    .nav-phone{
+      font-size:.88rem;display:flex;align-items:center;gap:8px;
+      padding:8px 14px;border-radius:999px;background:#020617;border:1px solid #374151;color:#f9fafb;white-space:nowrap
+    }
+    .nav-burger{display:none;flex-direction:column;gap:4px;width:26px;height:26px;cursor:pointer}
+    .nav-burger span{display:block;height:2px;width:100%;border-radius:999px;background:#e5e7eb}
 
     /* HERO */
-    .hero{padding:80px 0}
-    .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
-    .hero-title{font-size:clamp(2.2rem,3vw,2.9rem);line-height:1.2}
+    .hero{
+      padding:80px 0 90px;
+      background:radial-gradient(circle at top left,rgba(248,250,252,.06),transparent 55%),var(--bg-main)
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns:minmax(0,1.15fr) minmax(0,.9fr);
+      gap:40px;align-items:center
+    }
+    .eyebrow{text-transform:uppercase;letter-spacing:.22em;font-size:.75rem;color:var(--text-muted);margin-bottom:10px}
+    .hero-title{font-size:clamp(2.2rem,3.2vw,2.9rem);line-height:1.2;margin:0 0 14px;font-weight:600}
     .hero-title span{color:var(--accent)}
-    .hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}
+    .hero-subtitle{max-width:520px;font-size:.98rem;color:var(--text-muted);margin-bottom:20px}
+    .hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
     .tag-pill{
-      font-size:.7rem;padding:6px 12px;border-radius:999px;
-      border:1px solid #374151;text-transform:uppercase
+      font-size:.72rem;letter-spacing:.16em;padding:6px 12px;border-radius:999px;
+      background:rgba(15,23,42,.9);border:1px solid #374151;text-transform:uppercase;color:#e5e7eb
     }
+    .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:10px}
     .btn-primary{
-      background:var(--accent);border:none;border-radius:999px;
-      padding:10px 24px;font-weight:600;cursor:pointer;color:#111827
+      border-radius:999px;background:var(--accent);color:#111827;
+      padding:10px 24px;font-size:.9rem;font-weight:600;border:none;cursor:pointer;
+      box-shadow:0 18px 40px rgba(245,158,11,.45);
+      transition:transform .12s ease-out,box-shadow .12s ease-out,background .15s ease-out
     }
+    .btn-primary:hover{transform:translateY(-1px);box-shadow:0 22px 52px rgba(245,158,11,.65);background:#fbbf24}
+    .btn-ghost{
+      border-radius:999px;padding:9px 20px;border:1px solid #4b5563;background:transparent;color:#e5e7eb;
+      font-size:.9rem;cursor:pointer;display:inline-flex;align-items:center;gap:6px
+    }
+
     .hero-media{
-      background:var(--bg-card);
-      border-radius:var(--radius-lg);
-      padding:16px;border:1px solid #1f2937;
+      background:var(--bg-card);border-radius:var(--radius-lg);padding:18px;border:1px solid #1f2937;
       box-shadow:var(--shadow-soft)
     }
-    .hero-photo{border-radius:14px;overflow:hidden;height:260px}
+    .hero-photo{border-radius:14px;overflow:hidden;background:#020617;height:260px;position:relative}
     .hero-photo img{width:100%;height:100%;object-fit:cover}
+    .hero-badge{
+      position:absolute;left:16px;bottom:16px;padding:8px 12px;border-radius:999px;
+      background:rgba(15,23,42,.92);display:inline-flex;align-items:center;gap:8px;
+      border:1px solid rgba(148,163,184,.7);font-size:.75rem;backdrop-filter:blur(12px)
+    }
+    .hero-badge-dot{width:10px;height:10px;border-radius:999px;background:#22c55e;box-shadow:0 0 0 4px rgba(34,197,94,.35)}
+    .hero-stats{
+      margin-top:16px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;
+      font-size:.8rem;color:var(--text-muted)
+    }
+    .hero-stat{border-radius:12px;padding:10px;background:rgba(15,23,42,.95);border:1px solid #1f2937}
+    .hero-stat strong{display:block;color:#f9fafb;margin-bottom:3px;font-size:.9rem}
 
     /* SECTIONS */
     section{padding:80px 0}
-    .section-header{max-width:720px;margin-bottom:32px}
-    .section-title{font-size:1.8rem}
+    .section-header{max-width:720px;margin-bottom:34px}
+    .section-eyebrow{text-transform:uppercase;letter-spacing:.22em;font-size:.75rem;color:var(--text-muted);margin-bottom:8px}
+    .section-title{font-size:1.8rem;margin:0 0 4px}
+    .section-subtitle{font-size:.95rem;color:var(--text-muted);margin:0}
 
     /* SERVICES */
-    .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+    #sluzby{background:radial-gradient(circle at top,#020617 0,#020617 35%,#020617 100%)}
+    .services-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
     .service-card{
-      background:var(--bg-card);
-      padding:20px;border-radius:20px;border:1px solid #1f2937;
-      box-shadow:var(--shadow-soft)
+      background:var(--bg-card);border-radius:20px;padding:18px 18px 22px;border:1px solid #1f2937;
+      box-shadow:0 18px 42px rgba(0,0,0,.85);position:relative;overflow:hidden;
+      transition:transform .12s ease-out,box-shadow .12s ease-out,border-color .12s ease-out,background .12s ease-out
     }
+    .service-card::before{content:"";position:absolute;inset:0;height:4px;background:linear-gradient(90deg,#f59e0b,#fbbf24,#fde68a)}
+    .service-card:hover{transform:translateY(-3px);border-color:#4b5563;background:var(--bg-card-soft);box-shadow:0 22px 52px rgba(0,0,0,.95)}
+    .service-label{margin-top:8px;font-size:.7rem;text-transform:uppercase;letter-spacing:.16em;color:var(--text-muted)}
+    .service-title{margin:4px 0 4px;font-size:1.05rem}
+    .service-desc{margin:0;font-size:.9rem;color:#d1d5db}
 
-    /* GALLERY */
+    /* REALIZACE */
+    #realizace{background:radial-gradient(circle at top,#020617 0,#020617 40%,#020617 100%)}
     .gallery-shell{
-      background:var(--bg-card);
-      padding:20px;border-radius:20px;border:1px solid #1f2937
+      border-radius:var(--radius-lg);padding:20px 20px 22px;background:var(--bg-card);
+      border:1px solid #1f2937;box-shadow:var(--shadow-soft)
     }
-    .gallery-tabs{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+    .gallery-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
     .gallery-tab{
-      padding:6px 14px;border-radius:999px;border:1px solid #374151;
-      background:#020617;cursor:pointer
+      border-radius:999px;padding:6px 14px;font-size:.86rem;border:1px solid #374151;background:#020617;color:#e5e7eb;
+      cursor:pointer;opacity:.85
     }
-    .gallery-tab.active{background:var(--accent);color:#111827}
+    .gallery-tab.active{background:var(--accent);color:#111827;border-color:var(--accent);opacity:1}
+    .gallery-caption-top{text-align:center;margin-bottom:10px}
+    #gallery-job{
+      display:inline-block;padding:4px 12px;border-radius:999px;background:#020617;border:1px solid #374151;
+      font-size:.95rem;margin-bottom:4px;transition:box-shadow .3s ease,border-color .3s ease
+    }
+    #gallery-job.glow{box-shadow:0 0 0 3px var(--accent-soft);border-color:var(--accent)}
+    #gallery-text{font-size:.88rem;color:var(--text-muted);margin:0}
+    .gallery-viewer{margin-top:12px;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:16px;align-items:stretch}
     .gallery-image-wrapper{
-      height:320px;border-radius:16px;border:1px solid #1f2937;
-      overflow:hidden;cursor:pointer
+      border-radius:16px;background:#020617;border:1px solid #1f2937;padding:8px 0;overflow:hidden;position:relative;height:320px;
+      box-shadow:0 18px 40px rgba(0,0,0,.9);display:flex;align-items:center;justify-content:center;cursor:pointer;
+      transition:box-shadow .3s ease,border-color .3s ease
     }
-    .gallery-track{display:flex;gap:8px;height:100%}
-    .gallery-slide{flex:0 0 260px}
+    .gallery-image-wrapper.glow{box-shadow:0 0 0 3px var(--accent-soft),0 22px 50px rgba(0,0,0,.95);border-color:var(--accent)}
+    .gallery-track{height:100%;display:flex;gap:8px;will-change:transform}
+    .gallery-slide{flex:0 0 260px;max-width:260px;height:100%;display:flex;align-items:center;justify-content:center}
     .gallery-slide img{width:100%;height:100%;object-fit:cover;border-radius:12px}
+    .gallery-caption-side{font-size:.88rem;color:var(--text-muted)}
+    .gallery-footer{margin-top:12px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+    .gallery-dots{display:flex;gap:6px;align-items:center}
+    .gallery-dot{
+      width:8px;height:8px;border-radius:999px;background:#1f2937;box-shadow:0 0 0 1px #374151;
+      opacity:.4;transition:.18s
+    }
+    .gallery-dot.active{width:12px;height:12px;opacity:1;background:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+    .gallery-full-btn{
+      border-radius:999px;padding:7px 14px;font-size:.84rem;border:1px solid #4b5563;background:#020617;color:#e5e7eb;
+      display:inline-flex;align-items:center;gap:6px;cursor:pointer
+    }
+    .gallery-full-btn span{font-size:1.1rem;line-height:0}
 
     /* MODAL */
-    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:100}
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:80}
     .modal.open{display:flex}
-    .modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.8)}
+    .modal-backdrop{position:absolute;inset:0;background:rgba(15,23,42,.85);backdrop-filter:blur(6px)}
     .modal-content{
-      background:#020617;border-radius:20px;padding:20px;
-      max-width:1000px;width:92%;z-index:1
+      position:relative;max-width:1000px;width:92%;max-height:86vh;background:#020617;border-radius:20px;border:1px solid #4b5563;
+      box-shadow:0 24px 70px rgba(0,0,0,.95);padding:18px 18px 20px;z-index:1;display:flex;flex-direction:column;gap:12px
     }
-    .modal-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
-    .modal-thumb img{width:100%;height:180px;object-fit:cover;border-radius:12px}
+    .modal-header{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-bottom:8px;border-bottom:1px solid #1f2937}
+    .modal-header h3{margin:0;font-size:1.1rem}
+    .modal-header small{color:var(--text-muted);font-size:.8rem}
+    .modal-close{
+      border-radius:999px;border:1px solid #4b5563;background:#020617;color:#e5e7eb;width:28px;height:28px;cursor:pointer;
+      display:inline-flex;align-items:center;justify-content:center;font-size:1rem
+    }
+    .modal-grid{
+      margin-top:4px;padding-right:4px;overflow-y:auto;display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px
+    }
+    .modal-thumb{border-radius:12px;overflow:hidden;border:1px solid #1f2937;background:black}
+    .modal-thumb img{width:100%;height:180px;object-fit:cover;display:block}
+
+    /* ABOUT */
+    .about-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:28px;align-items:flex-start}
+    .about-card{
+      border-radius:var(--radius-lg);padding:18px 20px 22px;background:var(--bg-card);
+      border:1px solid #1f2937;box-shadow:var(--shadow-soft);font-size:.94rem;color:var(--text-muted)
+    }
+    .about-list{margin:10px 0 0;padding-left:18px;font-size:.9rem}
+    .about-list li{margin-bottom:5px}
+
+    /* KONTAKT */
+    #kontakt{background:radial-gradient(circle at top,#020617 0,#020617 45%,#020617 100%)}
+    .contact-inner{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:26px;align-items:flex-start}
+    .contact-card{
+      border-radius:var(--radius-lg);padding:20px 22px 22px;background:#020617;border:1px solid #4b5563;box-shadow:var(--shadow-soft)
+    }
+    .contact-header-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+    .contact-header-row small{font-size:.8rem;color:#a5b4fc}
+    .whatsapp-btn{
+      display:block;width:100%;padding:11px 18px;margin-bottom:14px;border-radius:999px;border:none;cursor:pointer;
+      background:#22c55e;color:#052e16;font-weight:600;font-size:.96rem;text-align:center;
+      box-shadow:0 18px 40px rgba(34,197,94,.55);display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      transition:transform .12s ease-out,box-shadow .12s ease-out,background .15s ease-out
+    }
+    .whatsapp-btn span{font-size:1.1rem}
+    .whatsapp-btn:hover{background:#16a34a;transform:translateY(-1px);box-shadow:0 22px 50px rgba(34,197,94,.7)}
+    form{margin-top:6px;display:grid;gap:10px;font-size:.9rem}
+    label{display:block;margin-bottom:3px}
+    input,textarea{
+      width:100%;padding:9px 10px;border-radius:10px;border:1px solid #4b5563;background:#020617;color:#e5e7eb;
+      font-family:inherit;font-size:.9rem
+    }
+    input::placeholder,textarea::placeholder{color:#6b7280}
+    textarea{resize:vertical;min-height:110px}
+    .contact-note{font-size:.8rem;color:var(--text-muted)}
+    .contact-side-note{font-size:.9rem;color:var(--text-muted);max-width:320px}
 
     /* FOOTER */
-    footer{border-top:1px solid #1f2937;padding:16px 0;font-size:.8rem;color:#6b7280}
+    footer{background:#020617;border-top:1px solid #1f2937;color:#6b7280;font-size:.8rem;padding:14px 0 18px}
+    .footer-inner{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
-    @media(max-width:900px){
-      .hero-grid{grid-template-columns:1fr}
-      .services-grid{grid-template-columns:1fr}
+    /* RESPONSIVE */
+    @media (max-width:960px){
+      .hero-grid,.about-grid,.contact-inner,.gallery-viewer{grid-template-columns:minmax(0,1fr)}
+      .hero-media{order:-1}
+      .hero{padding-top:60px}
+    }
+    @media (max-width:840px){
+      .nav-links{display:none}
+      .nav-burger{display:flex}
+    }
+    @media (max-width:720px){
+      .services-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    }
+    @media (max-width:620px){
+      section{padding:60px 0}
+      .services-grid{grid-template-columns:minmax(0,1fr)}
+      .gallery-image-wrapper{height:260px}
+      .gallery-slide{flex:0 0 210px;max-width:210px}
     }
   </style>
 </head>
 
 <body>
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="navbar-inner">
+      <div class="brand">
+        <div class="brand-mark">T</div>
+        <div>
+          <div>Truhlářství na míru</div>
+          <div class="brand-sub">kuchyně • vestavby • nábytek</div>
+        </div>
+      </div>
 
-<header class="navbar">
-  <div class="navbar-inner container">
-    <div class="brand">
-      <div class="brand-mark">T</div>
-      <div>
-        <div>Truhlářství</div>
-        <div class="brand-sub">na míru</div>
+      <nav class="nav-links">
+        <a href="#uvod">Úvod</a>
+        <a href="#sluzby">Služby</a>
+        <a href="#realizace">Realizace</a>
+        <a href="#omne">O mně</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
+
+      <a href="tel:+420000000000" class="nav-phone">
+        <span>+420&nbsp;000&nbsp;000&nbsp;000</span>
+      </a>
+
+      <div class="nav-burger" onclick="toggleNav()">
+        <span></span><span></span><span></span>
       </div>
     </div>
-    <nav class="nav-links">
-      <a href="#uvod">Úvod</a>
-      <a href="#sluzby">Služby</a>
-      <a href="#realizace">Realizace</a>
-      <a href="#kontakt">Kontakt</a>
-    </nav>
-    <a class="nav-phone" href="tel:+420000000000">+420 000 000 000</a>
-  </div>
-</header>
+  </header>
 
-<section id="uvod" class="hero">
-  <div class="container hero-grid">
-    <div>
-      <h1 class="hero-title">
-        Nábytek na míru,<br><span>který dává smysl.</span>
-      </h1>
-      <div class="hero-tags">
-        <div class="tag-pill">Kuchyně</div>
-        <div class="tag-pill">Vestavby</div>
-        <div class="tag-pill">Obklady</div>
+  <!-- HERO -->
+  <section id="uvod" class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow">Výroba • montáž • servis nábytku na míru</div>
+          <h1 class="hero-title">
+            Nábytek, který sedí prostoru i životu.
+            <span>Truhlářství na míru.</span>
+          </h1>
+          <p class="hero-subtitle">
+            Kuchyně, vestavné skříně, obklady a nábytek do bytu i domu. Zaměření, návrh,
+            výroba i montáž — domluva napřímo a čistá práce.
+          </p>
+
+          <div class="hero-tags">
+            <div class="tag-pill">Kuchyně na míru</div>
+            <div class="tag-pill">Vestavné skříně</div>
+            <div class="tag-pill">Schody &amp; obklady</div>
+          </div>
+
+          <div class="hero-actions">
+            <button class="btn-primary" onclick="scrollToId('kontakt')">Napsat poptávku</button>
+            <button class="btn-ghost" onclick="scrollToId('sluzby')">Co přesně dělám →</button>
+          </div>
+
+          <div class="hero-note" style="font-size:0.8rem;color:var(--text-muted);">
+            Tip: Pošlete fotku prostoru + přibližné rozměry. Ozvu se s návrhem dalšího postupu.
+          </div>
+        </div>
+
+        <aside class="hero-media">
+          <div class="hero-photo">
+            <img src="fotky/1.jpeg" alt="Truhlářství – ukázka práce" />
+            <div class="hero-badge">
+              <span class="hero-badge-dot"></span>
+              Zaměření i montáž osobně
+            </div>
+          </div>
+
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <strong>Kuchyně</strong>
+              návrh, výroba, montáž
+            </div>
+            <div class="hero-stat">
+              <strong>Vestavby</strong>
+              skříně, šatny, niky
+            </div>
+            <div class="hero-stat">
+              <strong>Interiér</strong>
+              obklady, stoly, police
+            </div>
+          </div>
+        </aside>
       </div>
-      <button class="btn-primary" onclick="document.getElementById('kontakt').scrollIntoView({behavior:'smooth'})">
-        Napsat poptávku
-      </button>
     </div>
-    <aside class="hero-media">
-      <div class="hero-photo">
-        <img src="fotky/1.jpg" alt="Truhlářství – realizace" />
+  </section>
+
+  <!-- SLUZBY -->
+  <section id="sluzby">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-eyebrow">Služby</div>
+        <h2 class="section-title">Co nejčastěji vyrábím a montuji</h2>
+        <p class="section-subtitle">
+          Nábytek na míru od návrhu po montáž. Materiály a řešení vybereme podle rozpočtu,
+          odolnosti a stylu.
+        </p>
       </div>
-    </aside>
-  </div>
-</section>
 
-<section id="sluzby">
-  <div class="container">
-    <div class="section-header">
-      <h2 class="section-title">Služby</h2>
-    </div>
-    <div class="services-grid">
-      <div class="service-card">Kuchyně na míru</div>
-      <div class="service-card">Vestavné skříně a šatny</div>
-      <div class="service-card">Obklady, lamely, nábytek</div>
-    </div>
-  </div>
-</section>
+      <div class="services-grid">
+        <article class="service-card">
+          <div class="service-label">Kuchyně</div>
+          <h3 class="service-title">Kuchyně na míru</h3>
+          <p class="service-desc">Návrh, výroba i montáž – praktické řešení podle prostoru.</p>
+        </article>
 
-<section id="realizace">
-  <div class="container">
-    <div class="section-header">
-      <h2 class="section-title">Realizace</h2>
-    </div>
+        <article class="service-card">
+          <div class="service-label">Vestavby</div>
+          <h3 class="service-title">Vestavné skříně a šatny</h3>
+          <p class="service-desc">Řešení do nik, pod schody, do podkroví.</p>
+        </article>
 
-    <div class="gallery-shell">
-      <div class="gallery-tabs" id="gallery-tabs"></div>
+        <article class="service-card">
+          <div class="service-label">Dřevo</div>
+          <h3 class="service-title">Masiv &amp; dýha</h3>
+          <p class="service-desc">Stoly, lavice, parapety, police – povrch dle použití.</p>
+        </article>
 
-      <div class="gallery-image-wrapper" id="gallery-wrapper">
-        <div class="gallery-track" id="gallery-track"></div>
+        <article class="service-card">
+          <div class="service-label">Interiér</div>
+          <h3 class="service-title">Obklady a lamely</h3>
+          <p class="service-desc">Stěnové obklady, lamely, zakrytí detailů a techniky.</p>
+        </article>
+
+        <article class="service-card">
+          <div class="service-label">Dveře</div>
+          <h3 class="service-title">Posuvné systémy</h3>
+          <p class="service-desc">Posuvy do pouzdra i na stěnu, šatní dveře, zástěny.</p>
+        </article>
+
+        <article class="service-card">
+          <div class="service-label">Servis</div>
+          <h3 class="service-title">Opravy a úpravy nábytku</h3>
+          <p class="service-desc">Seřízení dvířek, výměna kování, doplnění polic.</p>
+        </article>
       </div>
     </div>
+  </section>
+
+  <!-- REALIZACE -->
+  <section id="realizace">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-eyebrow">Realizace</div>
+        <h2 class="section-title">Ukázky práce</h2>
+        <p class="section-subtitle">
+          Fotky z realizací. Kliknutím otevřete celou galerii.
+        </p>
+      </div>
+
+      <div class="gallery-shell">
+        <div class="gallery-tabs" id="gallery-tabs"></div>
+
+        <div class="gallery-caption-top">
+          <div id="gallery-job">Kuchyně</div>
+          <p id="gallery-text">Ukázka realizace – kuchyně na míru.</p>
+        </div>
+
+        <div class="gallery-viewer">
+          <div class="gallery-image-wrapper" id="gallery-wrapper" title="Kliknutím otevřete celou galerii">
+            <div class="gallery-track" id="gallery-track"></div>
+          </div>
+
+          <div class="gallery-caption-side">
+            Každá kategorie má vlastní fotky. Vše jsou reálné realizace.
+          </div>
+        </div>
+
+        <div class="gallery-footer">
+          <div class="gallery-dots" id="gallery-dots"></div>
+          <button class="gallery-full-btn" type="button" onclick="openGallery()">
+            <span>🖼</span> Zobrazit celou galerii
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODAL – plná galerie -->
+  <div class="modal" id="gallery-modal">
+    <div class="modal-backdrop" onclick="closeGallery()"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <div>
+          <h3>Galerie – <span id="modal-category-name"></span></h3>
+          <small>Všechny fotky z vybrané kategorie.</small>
+        </div>
+        <button class="modal-close" type="button" onclick="closeGallery()">×</button>
+      </div>
+      <div class="modal-grid" id="modal-grid"></div>
+    </div>
   </div>
-</section>
 
-<div class="modal" id="gallery-modal">
-  <div class="modal-backdrop" onclick="closeGallery()"></div>
-  <div class="modal-content">
-    <div class="modal-grid" id="modal-grid"></div>
-  </div>
-</div>
+  <!-- O MNE -->
+  <section id="omne">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-eyebrow">O mně</div>
+        <h2 class="section-title">Truhlář, se kterým se domluvíte napřímo</h2>
+        <p class="section-subtitle">
+          Přijedu, zaměřím, navrhnu řešení a potom to i vyrobím a namontuju.
+        </p>
+      </div>
 
-<section id="kontakt">
-  <div class="container">
-    <h2 class="section-title">Kontakt</h2>
-    <p>Telefon: <a href="tel:+420000000000">+420 000 000 000</a></p>
-  </div>
-</section>
+      <div class="about-grid">
+        <div class="about-card">
+          <p>
+            Dělám nábytek na míru pro byty i domy — kuchyně, vestavby, obklady i kusové věci.
+            Cíl je jednoduchý: aby to sedělo, vydrželo a vypadalo dobře.
+          </p>
+          <ul class="about-list">
+            <li>jasná domluva a rozpočet předem</li>
+            <li>důraz na detail a kvalitní kování</li>
+            <li>čistá montáž a ohleduplná práce</li>
+          </ul>
+        </div>
+        <div>
+          <p><strong>Nejčastěji řeším:</strong></p>
+          <ul class="about-list">
+            <li>kuchyně na míru</li>
+            <li>vestavné skříně a šatny</li>
+            <li>lamely a obklady</li>
+            <li>posuvné dveře</li>
+            <li>opravy a úpravy nábytku</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<footer>
-  <div class="container">
-    © <span id="year"></span> Truhlářství
-  </div>
-</footer>
+  <!-- KONTAKT -->
+  <section id="kontakt">
+    <div class="container">
+      <div class="contact-inner">
+        <div class="contact-card">
+          <div class="contact-header-row">
+            <div>
+              <div class="section-eyebrow" style="color:#9ca3af;">Kontakt</div>
+              <h2 class="section-title" style="margin-bottom:0;">Pošlete poptávku</h2>
+            </div>
+            <small>nejrychlejší je WhatsApp</small>
+          </div>
 
-<script>
-  document.getElementById("year").textContent = new Date().getFullYear();
+          <a class="whatsapp-btn" href="https://wa.me/420000000000" target="_blank" rel="noopener">
+            <span>💬</span> WhatsApp
+          </a>
 
-  /* === GALERIE – fotky/1.jpg až fotky/15.jpg === */
-  const categories = {
-    kuchyne:{label:"Kuchyně",slides:["1","2","3","4"]},
-    vestavby:{label:"Vestavby",slides:["5","6","7","8"]},
-    obklady:{label:"Obklady",slides:["9","10","11","12"]},
-    nabytek:{label:"Nábytek",slides:["13","14","15"]}
-  };
+          <form onsubmit="event.preventDefault(); alert('Zde doplňte vlastní zpracování formuláře (e-mail / backend).');">
+            <div>
+              <label for="name">Jméno</label>
+              <input type="text" id="name" name="name" placeholder="Jak vám mám říkat?" required />
+            </div>
+            <div>
+              <label for="message">Co potřebujete vyrobit?</label>
+              <textarea
+                id="message"
+                name="message"
+                placeholder="Typ zakázky, rozměry (orientačně), město, termín. Klidně i fotku prostoru."
+                required
+              ></textarea>
+            </div>
+            <button class="btn-primary" type="submit">Odeslat</button>
+            <div class="contact-note">Ozvu se zpravidla do dvou pracovních dnů.</div>
+          </form>
+        </div>
 
-  const tabs=document.getElementById("gallery-tabs");
-  const track=document.getElementById("gallery-track");
-  const modal=document.getElementById("gallery-modal");
-  const modalGrid=document.getElementById("modal-grid");
+        <div>
+          <p class="contact-side-note">
+            Pro rychlejší odhad pošlete fotku prostoru + přibližné rozměry. U kuchyní ideálně i půdorys.
+            Větší zakázky vždy předchází zaměření na místě.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  let current="kuchyne";
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer-inner">
+      <div>&copy; <span id="year"></span> Truhlářství – všechna práva vyhrazena.</div>
+      <div>Web s reálnými fotkami vaší práce.</div>
+    </div>
+  </footer>
 
-  function loadTabs(){
-    for(const k in categories){
-      const b=document.createElement("button");
-      b.className="gallery-tab"+(k===current?" active":"");
-      b.textContent=categories[k].label;
-      b.onclick=()=>{current=k;update()};
-      tabs.appendChild(b);
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    function scrollToId(id) {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
     }
-  }
 
-  function update(){
-    track.innerHTML="";
-    document.querySelectorAll(".gallery-tab").forEach(b=>b.classList.remove("active"));
-    [...tabs.children].find(b=>b.textContent===categories[current].label).classList.add("active");
+    function toggleNav() {
+      const nav = document.querySelector(".nav-links");
+      if (!nav) return;
+      const style = window.getComputedStyle(nav);
+      if (style.display === "none") {
+        nav.style.display = "flex";
+        nav.style.flexDirection = "column";
+        nav.style.position = "absolute";
+        nav.style.top = "56px";
+        nav.style.right = "20px";
+        nav.style.padding = "10px 16px";
+        nav.style.background = "rgba(2,6,23,0.97)";
+        nav.style.borderRadius = "14px";
+        nav.style.border = "1px solid #4b5563";
+        nav.style.boxShadow = "0 18px 40px rgba(0,0,0,0.9)";
+        nav.style.zIndex = "60";
+      } else {
+        nav.removeAttribute("style");
+      }
+    }
 
-    categories[current].slides.forEach(n=>{
-      const d=document.createElement("div");
-      d.className="gallery-slide";
-      d.innerHTML=`<img src="fotky/${n}.jpg">`;
-      track.appendChild(d);
+    /* === GALERIE – fotky/1.jpeg až fotky/15.jpeg === */
+    const categories = {
+      kuchyne: {
+        label: "Kuchyně",
+        slides: [
+          { src: "fotky/1.jpeg", alt: "Kuchyně – realizace 1", title: "Kuchyně", text: "Ukázka kuchyně na míru." },
+          { src: "fotky/2.jpeg", alt: "Kuchyně – realizace 2", title: "Kuchyně", text: "Detail provedení a kování." },
+          { src: "fotky/3.jpeg", alt: "Kuchyně – realizace 3", title: "Kuchyně", text: "Pracovní deska a čisté napojení." },
+          { src: "fotky/4.jpeg", alt: "Kuchyně – realizace 4", title: "Kuchyně", text: "Kompletní sestava v prostoru." }
+        ]
+      },
+      vestavby: {
+        label: "Vestavby",
+        slides: [
+          { src: "fotky/5.jpeg", alt: "Vestavby – realizace 1", title: "Vestavby", text: "Vestavná skříň / šatna na míru." },
+          { src: "fotky/6.jpeg", alt: "Vestavby – realizace 2", title: "Vestavby", text: "Řešení do nik a atypických prostor." },
+          { src: "fotky/7.jpeg", alt: "Vestavby – realizace 3", title: "Vestavby", text: "Úložné členění podle potřeb." },
+          { src: "fotky/8.jpeg", alt: "Vestavby – realizace 4", title: "Vestavby", text: "Čisté napojení na stěny a podlahu." }
+        ]
+      },
+      obklady: {
+        label: "Obklady & lamely",
+        slides: [
+          { src: "fotky/9.jpeg", alt: "Obklady – realizace 1", title: "Obklady", text: "Lamely / obklad stěny v interiéru." },
+          { src: "fotky/10.jpeg", alt: "Obklady – realizace 2", title: "Obklady", text: "Detail zakončení a spár." },
+          { src: "fotky/11.jpeg", alt: "Obklady – realizace 3", title: "Obklady", text: "Obklad TV stěny a vedení kabeláže." },
+          { src: "fotky/12.jpeg", alt: "Obklady – realizace 4", title: "Obklady", text: "Povrch a struktura podle stylu." }
+        ]
+      },
+      nabytek: {
+        label: "Nábytek",
+        slides: [
+          { src: "fotky/13.jpeg", alt: "Nábytek – realizace 1", title: "Nábytek", text: "Stůl / komoda / kusový nábytek." },
+          { src: "fotky/14.jpeg", alt: "Nábytek – realizace 2", title: "Nábytek", text: "Police a drobné prvky na míru." },
+          { src: "fotky/15.jpeg", alt: "Nábytek – realizace 3", title: "Nábytek", text: "Detail zpracování a hrany." }
+        ]
+      }
+    };
+
+    const SPEED = 0.25; // px / frame
+
+    const track = document.getElementById("gallery-track");
+    const wrapperEl = document.getElementById("gallery-wrapper");
+    const dotsContainer = document.getElementById("gallery-dots");
+    const jobEl = document.getElementById("gallery-job");
+    const textEl = document.getElementById("gallery-text");
+    const tabsEl = document.getElementById("gallery-tabs");
+
+    const modal = document.getElementById("gallery-modal");
+    const modalCategoryName = document.getElementById("modal-category-name");
+    const modalGrid = document.getElementById("modal-grid");
+
+    let currentCategoryKey = "kuchyne";
+    let slidesData = [];
+    let dots = [];
+    let offsetX = 0;
+    let direction = -1;
+    let slideStep = 268;
+    let lastCenterIndex = -1;
+    let animStarted = false;
+
+    function buildTabs() {
+      tabsEl.innerHTML = "";
+      Object.entries(categories).forEach(([key, cat]) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "gallery-tab" + (key === currentCategoryKey ? " active" : "");
+        btn.textContent = cat.label;
+        btn.addEventListener("click", () => {
+          if (currentCategoryKey === key) return;
+          currentCategoryKey = key;
+          document.querySelectorAll(".gallery-tab").forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          loadCategory();
+        });
+        tabsEl.appendChild(btn);
+      });
+    }
+
+    function loadCategory() {
+      const cat = categories[currentCategoryKey];
+      slidesData = cat.slides;
+
+      track.innerHTML = "";
+      dotsContainer.innerHTML = "";
+      dots = [];
+      offsetX = 0;
+      direction = -1;
+      lastCenterIndex = -1;
+
+      slidesData.forEach((s) => {
+        const slide = document.createElement("div");
+        slide.className = "gallery-slide";
+        const img = document.createElement("img");
+        img.src = s.src;
+        img.alt = s.alt;
+        slide.appendChild(img);
+        track.appendChild(slide);
+      });
+
+      slidesData.forEach(() => {
+        const dot = document.createElement("div");
+        dot.className = "gallery-dot";
+        dotsContainer.appendChild(dot);
+        dots.push(dot);
+      });
+
+      setupSizes();
+      updateCenter();
+    }
+
+    function setupSizes() {
+      const first = track.firstElementChild;
+      if (!first) return;
+      const rect = first.getBoundingClientRect();
+      const style = window.getComputedStyle(track);
+      const gap = parseFloat(style.columnGap || style.gap || 8);
+      slideStep = rect.width + gap;
+    }
+
+    function updateCenter() {
+      if (!slidesData.length) return;
+      const centerX = -offsetX + wrapperEl.clientWidth / 2;
+      const centerIndex = Math.min(
+        slidesData.length - 1,
+        Math.max(0, Math.floor(centerX / slideStep))
+      );
+      if (centerIndex === lastCenterIndex) return;
+      lastCenterIndex = centerIndex;
+
+      const s = slidesData[centerIndex];
+      jobEl.textContent = s.title;
+      textEl.textContent = s.text;
+
+      dots.forEach((d, i) => d.classList.toggle("active", i === centerIndex));
+
+      wrapperEl.classList.add("glow");
+      jobEl.classList.add("glow");
+      setTimeout(() => {
+        wrapperEl.classList.remove("glow");
+        jobEl.classList.remove("glow");
+      }, 700);
+    }
+
+    function tick() {
+      if (!slidesData.length) { requestAnimationFrame(tick); return; }
+
+      const totalWidth = slidesData.length * slideStep;
+      const maxOffset = 0;
+      const minOffset = Math.min(0, wrapperEl.clientWidth - totalWidth);
+
+      offsetX += direction * SPEED;
+
+      if (offsetX < minOffset) { offsetX = minOffset; direction = 1; }
+      else if (offsetX > maxOffset) { offsetX = maxOffset; direction = -1; }
+
+      track.style.transform = "translateX(" + offsetX + "px)";
+      updateCenter();
+      requestAnimationFrame(tick);
+    }
+
+    window.addEventListener("resize", () => {
+      const prevStep = slideStep;
+      setupSizes();
+      if (prevStep && slideStep) offsetX = offsetX * (slideStep / prevStep);
     });
-  }
 
-  function openGallery(){
-    modalGrid.innerHTML="";
-    categories[current].slides.forEach(n=>{
-      modalGrid.innerHTML+=`<div class="modal-thumb"><img src="fotky/${n}.jpg"></div>`;
-    });
-    modal.classList.add("open");
-  }
-  function closeGallery(){modal.classList.remove("open")}
+    // FULL GALLERY MODAL
+    function openGallery() {
+      const cat = categories[currentCategoryKey];
+      modalCategoryName.textContent = cat.label;
+      modalGrid.innerHTML = "";
+      cat.slides.forEach((s) => {
+        const thumb = document.createElement("div");
+        thumb.className = "modal-thumb";
+        const img = document.createElement("img");
+        img.src = s.src;
+        img.alt = s.alt;
+        thumb.appendChild(img);
+        modalGrid.appendChild(thumb);
+      });
+      modal.classList.add("open");
+      document.body.style.overflow = "hidden";
+    }
 
-  document.getElementById("gallery-wrapper").onclick=openGallery;
+    function closeGallery() {
+      modal.classList.remove("open");
+      document.body.style.overflow = "";
+    }
 
-  loadTabs();
-  update();
-</script>
+    wrapperEl.addEventListener("click", openGallery);
 
+    // init
+    buildTabs();
+    loadCategory();
+    if (!animStarted) { animStarted = true; requestAnimationFrame(tick); }
+  </script>
 </body>
 </html>
-
