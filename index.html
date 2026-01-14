@@ -1,1 +1,277 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <title>Truhlářství – nábytek na míru</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Truhlářství na míru – kuchyně, vestavby, obklady, nábytek. Výroba a montáž." />
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg-main:#020617;
+      --bg-card:#111827;
+      --bg-card-soft:#1f2937;
+      --text-main:#e5e7eb;
+      --text-muted:#9ca3af;
+      --accent:#f59e0b;
+      --accent-soft:rgba(245,158,11,.25);
+      --radius-lg:18px;
+      --shadow-soft:0 18px 40px rgba(0,0,0,.9);
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Montserrat,sans-serif;
+      background:#020617;
+      color:var(--text-main);
+      line-height:1.7
+    }
+    a{text-decoration:none;color:inherit}
+    img{max-width:100%;display:block}
+    .container{max-width:1160px;margin:0 auto;padding:0 20px}
+
+    /* NAVBAR */
+    .navbar{position:sticky;top:0;z-index:50;background:rgba(2,6,23,.95);border-bottom:1px solid #1f2937}
+    .navbar-inner{display:flex;justify-content:space-between;align-items:center;padding:12px 20px}
+    .brand{display:flex;gap:10px;align-items:center;font-weight:600;text-transform:uppercase;font-size:.9rem}
+    .brand-mark{
+      width:30px;height:30px;border-radius:50%;
+      background:conic-gradient(#f59e0b,#fde68a,#f59e0b);
+      display:flex;align-items:center;justify-content:center;
+      color:#020617;font-weight:800
+    }
+    .brand-sub{font-size:.7rem;color:var(--text-muted);letter-spacing:.18em}
+    .nav-links{display:flex;gap:22px;font-size:.9rem}
+    .nav-phone{border:1px solid #374151;padding:8px 14px;border-radius:999px;font-size:.88rem}
+
+    /* HERO */
+    .hero{padding:80px 0}
+    .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+    .hero-title{font-size:clamp(2.2rem,3vw,2.9rem);line-height:1.2}
+    .hero-title span{color:var(--accent)}
+    .hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}
+    .tag-pill{
+      font-size:.7rem;padding:6px 12px;border-radius:999px;
+      border:1px solid #374151;text-transform:uppercase
+    }
+    .btn-primary{
+      background:var(--accent);border:none;border-radius:999px;
+      padding:10px 24px;font-weight:600;cursor:pointer;color:#111827
+    }
+    .hero-media{
+      background:var(--bg-card);
+      border-radius:var(--radius-lg);
+      padding:16px;border:1px solid #1f2937;
+      box-shadow:var(--shadow-soft)
+    }
+    .hero-photo{border-radius:14px;overflow:hidden;height:260px}
+    .hero-photo img{width:100%;height:100%;object-fit:cover}
+
+    /* SECTIONS */
+    section{padding:80px 0}
+    .section-header{max-width:720px;margin-bottom:32px}
+    .section-title{font-size:1.8rem}
+
+    /* SERVICES */
+    .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+    .service-card{
+      background:var(--bg-card);
+      padding:20px;border-radius:20px;border:1px solid #1f2937;
+      box-shadow:var(--shadow-soft)
+    }
+
+    /* GALLERY */
+    .gallery-shell{
+      background:var(--bg-card);
+      padding:20px;border-radius:20px;border:1px solid #1f2937
+    }
+    .gallery-tabs{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+    .gallery-tab{
+      padding:6px 14px;border-radius:999px;border:1px solid #374151;
+      background:#020617;cursor:pointer
+    }
+    .gallery-tab.active{background:var(--accent);color:#111827}
+    .gallery-image-wrapper{
+      height:320px;border-radius:16px;border:1px solid #1f2937;
+      overflow:hidden;cursor:pointer
+    }
+    .gallery-track{display:flex;gap:8px;height:100%}
+    .gallery-slide{flex:0 0 260px}
+    .gallery-slide img{width:100%;height:100%;object-fit:cover;border-radius:12px}
+
+    /* MODAL */
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:100}
+    .modal.open{display:flex}
+    .modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.8)}
+    .modal-content{
+      background:#020617;border-radius:20px;padding:20px;
+      max-width:1000px;width:92%;z-index:1
+    }
+    .modal-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
+    .modal-thumb img{width:100%;height:180px;object-fit:cover;border-radius:12px}
+
+    /* FOOTER */
+    footer{border-top:1px solid #1f2937;padding:16px 0;font-size:.8rem;color:#6b7280}
+
+    @media(max-width:900px){
+      .hero-grid{grid-template-columns:1fr}
+      .services-grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="navbar">
+  <div class="navbar-inner container">
+    <div class="brand">
+      <div class="brand-mark">T</div>
+      <div>
+        <div>Truhlářství</div>
+        <div class="brand-sub">na míru</div>
+      </div>
+    </div>
+    <nav class="nav-links">
+      <a href="#uvod">Úvod</a>
+      <a href="#sluzby">Služby</a>
+      <a href="#realizace">Realizace</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+    <a class="nav-phone" href="tel:+420000000000">+420 000 000 000</a>
+  </div>
+</header>
+
+<section id="uvod" class="hero">
+  <div class="container hero-grid">
+    <div>
+      <h1 class="hero-title">
+        Nábytek na míru,<br><span>který dává smysl.</span>
+      </h1>
+      <div class="hero-tags">
+        <div class="tag-pill">Kuchyně</div>
+        <div class="tag-pill">Vestavby</div>
+        <div class="tag-pill">Obklady</div>
+      </div>
+      <button class="btn-primary" onclick="document.getElementById('kontakt').scrollIntoView({behavior:'smooth'})">
+        Napsat poptávku
+      </button>
+    </div>
+    <aside class="hero-media">
+      <div class="hero-photo">
+        <img src="fotky/1.jpg" alt="Truhlářství – realizace" />
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section id="sluzby">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Služby</h2>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">Kuchyně na míru</div>
+      <div class="service-card">Vestavné skříně a šatny</div>
+      <div class="service-card">Obklady, lamely, nábytek</div>
+    </div>
+  </div>
+</section>
+
+<section id="realizace">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Realizace</h2>
+    </div>
+
+    <div class="gallery-shell">
+      <div class="gallery-tabs" id="gallery-tabs"></div>
+
+      <div class="gallery-image-wrapper" id="gallery-wrapper">
+        <div class="gallery-track" id="gallery-track"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="modal" id="gallery-modal">
+  <div class="modal-backdrop" onclick="closeGallery()"></div>
+  <div class="modal-content">
+    <div class="modal-grid" id="modal-grid"></div>
+  </div>
+</div>
+
+<section id="kontakt">
+  <div class="container">
+    <h2 class="section-title">Kontakt</h2>
+    <p>Telefon: <a href="tel:+420000000000">+420 000 000 000</a></p>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    © <span id="year"></span> Truhlářství
+  </div>
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  /* === GALERIE – fotky/1.jpg až fotky/15.jpg === */
+  const categories = {
+    kuchyne:{label:"Kuchyně",slides:["1","2","3","4"]},
+    vestavby:{label:"Vestavby",slides:["5","6","7","8"]},
+    obklady:{label:"Obklady",slides:["9","10","11","12"]},
+    nabytek:{label:"Nábytek",slides:["13","14","15"]}
+  };
+
+  const tabs=document.getElementById("gallery-tabs");
+  const track=document.getElementById("gallery-track");
+  const modal=document.getElementById("gallery-modal");
+  const modalGrid=document.getElementById("modal-grid");
+
+  let current="kuchyne";
+
+  function loadTabs(){
+    for(const k in categories){
+      const b=document.createElement("button");
+      b.className="gallery-tab"+(k===current?" active":"");
+      b.textContent=categories[k].label;
+      b.onclick=()=>{current=k;update()};
+      tabs.appendChild(b);
+    }
+  }
+
+  function update(){
+    track.innerHTML="";
+    document.querySelectorAll(".gallery-tab").forEach(b=>b.classList.remove("active"));
+    [...tabs.children].find(b=>b.textContent===categories[current].label).classList.add("active");
+
+    categories[current].slides.forEach(n=>{
+      const d=document.createElement("div");
+      d.className="gallery-slide";
+      d.innerHTML=`<img src="fotky/${n}.jpg">`;
+      track.appendChild(d);
+    });
+  }
+
+  function openGallery(){
+    modalGrid.innerHTML="";
+    categories[current].slides.forEach(n=>{
+      modalGrid.innerHTML+=`<div class="modal-thumb"><img src="fotky/${n}.jpg"></div>`;
+    });
+    modal.classList.add("open");
+  }
+  function closeGallery(){modal.classList.remove("open")}
+
+  document.getElementById("gallery-wrapper").onclick=openGallery;
+
+  loadTabs();
+  update();
+</script>
+
+</body>
+</html>
 
