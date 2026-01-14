@@ -179,7 +179,7 @@
       will-change:transform;
     }
 
-    /* ✅ Hover efekt: zvětšit konkrétní fotku */
+    /* Hover efekt: zvětšit konkrétní fotku */
     .gallery-image-wrapper:hover .gallery-slide img{transform:scale(1.0)}
     .gallery-slide:hover img{transform:scale(1.06)}
 
@@ -202,10 +202,25 @@
     .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:80}
     .modal.open{display:flex}
     .modal-backdrop{position:absolute;inset:0;background:rgba(15,23,42,.85);backdrop-filter:blur(6px)}
+
+    /* ✅ fix: žádný horizontální drift + scroll jen uvnitř */
     .modal-content{
-      position:relative;max-width:1000px;width:92%;max-height:86vh;background:#020617;border-radius:20px;border:1px solid #4b5563;
-      box-shadow:0 24px 70px rgba(0,0,0,.95);padding:18px 18px 20px;z-index:1;display:flex;flex-direction:column;gap:12px
+      position:relative;
+      max-width:1000px;
+      width:92%;
+      height:86vh;                 /* fixní výška */
+      background:#020617;
+      border-radius:20px;
+      border:1px solid #4b5563;
+      box-shadow:0 24px 70px rgba(0,0,0,.95);
+      padding:18px;
+      z-index:1;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      overflow:hidden;             /* žádný horizontální přetok */
     }
+
     .modal-header{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-bottom:8px;border-bottom:1px solid #1f2937}
     .modal-header h3{margin:0;font-size:1.1rem}
     .modal-header small{color:var(--text-muted);font-size:.8rem}
@@ -214,54 +229,41 @@
       display:inline-flex;align-items:center;justify-content:center;font-size:1rem
     }
 
-    /* MODAL GRID (zarovnání odshora + bez ořezu) */
-    /* ✅ MASONRY (bez děr) přes CSS columns */
-.modal-grid{
-  margin-top: 10px;
-  padding-right: 6px;
-  overflow-y: auto;
+    /* ✅ MASONRY v modalu + scroll pouze vertikální */
+    .modal-grid{
+      flex:1;                      /* zabere zbytek pod headerem */
+      overflow-y:auto;             /* scroll v modalu */
+      overflow-x:hidden;           /* bez posunu do strany */
+      padding-right:10px;          /* prostor pro scrollbar uvnitř boxu */
+      box-sizing:border-box;
+      scrollbar-gutter: stable both-edges;
 
-  /* columns masonry */
-  column-count: 4;
-  column-gap: 12px;
+      column-count:4;
+      column-gap:12px;
+    }
+    @media (max-width: 980px){ .modal-grid{ column-count:3; } }
+    @media (max-width: 720px){ .modal-grid{ column-count:2; } }
+    @media (max-width: 520px){ .modal-grid{ column-count:1; } }
 
-  /* aby se to nelepilo na okraj */
-  max-height: 70vh;
-}
+    .modal-thumb{
+      break-inside: avoid;
+      -webkit-column-break-inside: avoid;
+      page-break-inside: avoid;
 
-/* responzivně */
-@media (max-width: 980px){
-  .modal-grid{ column-count: 3; }
-}
-@media (max-width: 720px){
-  .modal-grid{ column-count: 2; }
-}
-@media (max-width: 520px){
-  .modal-grid{ column-count: 1; }
-}
-
-.modal-thumb{
-  /* aby se položky nelámaly mezi sloupci */
-  break-inside: avoid;
-  -webkit-column-break-inside: avoid;
-  page-break-inside: avoid;
-
-  margin: 0 0 12px;  /* mezera mezi fotkama */
-  border-radius: 12px;
-  border: 1px solid #1f2937;
-  background: #000;
-  padding: 8px;
-  overflow: hidden;
-}
-
-.modal-thumb img{
-  width: 100%;
-  height: auto;        /* ✅ neřeže */
-  object-fit: contain; /* ✅ neřeže */
-  border-radius: 10px;
-  display: block;
-}
-
+      margin:0 0 12px;
+      border-radius:12px;
+      border:1px solid #1f2937;
+      background:#000;
+      padding:8px;
+      overflow:hidden;
+    }
+    .modal-thumb img{
+      width:100%;
+      height:auto;
+      object-fit:contain;          /* neřeže */
+      border-radius:10px;
+      display:block;
+    }
 
     /* ABOUT */
     .about-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:28px;align-items:flex-start}
@@ -745,7 +747,7 @@
       requestAnimationFrame(tick);
     }
 
-    // ✅ Hover: zpomalit slideshow
+    // Hover: zpomalit slideshow
     wrapperEl.addEventListener("mouseenter", () => { SPEED = SLOW_SPEED; });
     wrapperEl.addEventListener("mouseleave", () => { SPEED = FAST_SPEED; });
 
@@ -767,13 +769,19 @@
         thumb.appendChild(img);
         modalGrid.appendChild(thumb);
       });
+
       modal.classList.add("open");
+
+      // ✅ zamkne scroll bez "cuknutí" do strany
+      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
       document.body.style.overflow = "hidden";
+      document.body.style.paddingRight = scrollbarWidth + "px";
     }
 
     function closeGallery() {
       modal.classList.remove("open");
       document.body.style.overflow = "";
+      document.body.style.paddingRight = "";
     }
 
     wrapperEl.addEventListener("click", openGallery);
