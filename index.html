@@ -82,7 +82,6 @@
     .eyebrow{text-transform:uppercase;letter-spacing:.22em;font-size:.75rem;color:var(--text-muted);margin-bottom:10px}
     .hero-title{font-size:clamp(2.2rem,3.2vw,2.9rem);line-height:1.2;margin:0 0 14px;font-weight:600}
     .hero-title span{color:var(--accent)}
-    .hero-subtitle{max-width:520px;font-size:.98rem;color:var(--text-muted);margin-bottom:20px}
     .hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
     .tag-pill{
       font-size:.72rem;letter-spacing:.16em;padding:6px 12px;border-radius:999px;
@@ -154,9 +153,16 @@
       font-size:.95rem;margin-bottom:4px;transition:box-shadow .3s ease,border-color .3s ease
     }
     #gallery-job.glow{box-shadow:0 0 0 3px var(--accent-soft);border-color:var(--accent)}
-    #gallery-text{font-size:.88rem;color:var(--text-muted);margin:0}
+    /* text pod nadpisem galerie schovaný */
+    #gallery-text{display:none}
 
-    .gallery-viewer{margin-top:12px;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:16px;align-items:stretch}
+    .gallery-viewer{
+      margin-top:12px;
+      display:grid;
+      grid-template-columns:minmax(0,1fr);
+      gap:16px;
+      align-items:stretch
+    }
 
     .gallery-image-wrapper{
       border-radius:16px;background:#020617;border:1px solid #1f2937;padding:8px 0;overflow:hidden;position:relative;height:320px;
@@ -178,12 +184,10 @@
       transition:transform .18s ease-out;
       will-change:transform;
     }
-
-    /* Hover efekt: zvětšit konkrétní fotku */
-    .gallery-image-wrapper:hover .gallery-slide img{transform:scale(1.0)}
     .gallery-slide:hover img{transform:scale(1.06)}
 
-    .gallery-caption-side{font-size:.88rem;color:var(--text-muted)}
+    /* odstraněn side text úplně */
+    .gallery-caption-side{display:none}
 
     .gallery-footer{margin-top:12px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
     .gallery-dots{display:flex;gap:6px;align-items:center}
@@ -203,12 +207,11 @@
     .modal.open{display:flex}
     .modal-backdrop{position:absolute;inset:0;background:rgba(15,23,42,.85);backdrop-filter:blur(6px)}
 
-    /* ✅ fix: žádný horizontální drift + scroll jen uvnitř */
     .modal-content{
       position:relative;
       max-width:1000px;
       width:92%;
-      height:86vh;                 /* fixní výška */
+      height:86vh;
       background:#020617;
       border-radius:20px;
       border:1px solid #4b5563;
@@ -218,23 +221,22 @@
       display:flex;
       flex-direction:column;
       gap:12px;
-      overflow:hidden;             /* žádný horizontální přetok */
+      overflow:hidden;
     }
 
     .modal-header{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-bottom:8px;border-bottom:1px solid #1f2937}
     .modal-header h3{margin:0;font-size:1.1rem}
-    .modal-header small{color:var(--text-muted);font-size:.8rem}
+    .modal-header small{display:none} /* odstraněn text "Všechny fotky." */
     .modal-close{
       border-radius:999px;border:1px solid #4b5563;background:#020617;color:#e5e7eb;width:28px;height:28px;cursor:pointer;
       display:inline-flex;align-items:center;justify-content:center;font-size:1rem
     }
 
-    /* ✅ MASONRY v modalu + scroll pouze vertikální */
     .modal-grid{
-      flex:1;                      /* zabere zbytek pod headerem */
-      overflow-y:auto;             /* scroll v modalu */
-      overflow-x:hidden;           /* bez posunu do strany */
-      padding-right:10px;          /* prostor pro scrollbar uvnitř boxu */
+      flex:1;
+      overflow-y:auto;
+      overflow-x:hidden;
+      padding-right:10px;
       box-sizing:border-box;
       scrollbar-gutter: stable both-edges;
 
@@ -260,7 +262,7 @@
     .modal-thumb img{
       width:100%;
       height:auto;
-      object-fit:contain;          /* neřeže */
+      object-fit:contain;
       border-radius:10px;
       display:block;
     }
@@ -307,7 +309,7 @@
 
     /* RESPONSIVE */
     @media (max-width:960px){
-      .hero-grid,.about-grid,.contact-inner,.gallery-viewer{grid-template-columns:minmax(0,1fr)}
+      .hero-grid,.about-grid,.contact-inner{grid-template-columns:minmax(0,1fr)}
       .hero-media{order:-1}
       .hero{padding-top:60px}
     }
@@ -367,10 +369,6 @@
             Nábytek, který sedí prostoru i životu.
             <span>Truhlářství na míru.</span>
           </h1>
-          <p class="hero-subtitle">
-            Kuchyně, vestavné skříně, obklady a nábytek do bytu i domu. Zaměření, návrh,
-            výroba i montáž — domluva napřímo a čistá práce.
-          </p>
 
           <div class="hero-tags">
             <div class="tag-pill">Kuchyně na míru</div>
@@ -381,10 +379,6 @@
           <div class="hero-actions">
             <button class="btn-primary" onclick="scrollToId('kontakt')">Napsat poptávku</button>
             <button class="btn-ghost" onclick="scrollToId('sluzby')">Co přesně dělám →</button>
-          </div>
-
-          <div class="hero-note" style="font-size:0.8rem;color:var(--text-muted);">
-            Tip: Pošlete fotku prostoru + přibližné rozměry. Ozvu se s návrhem dalšího postupu.
           </div>
         </div>
 
@@ -422,10 +416,7 @@
       <div class="section-header">
         <div class="section-eyebrow">Služby</div>
         <h2 class="section-title">Co nejčastěji vyrábím a montuji</h2>
-        <p class="section-subtitle">
-          Nábytek na míru od návrhu po montáž. Materiály a řešení vybereme podle rozpočtu,
-          odolnosti a stylu.
-        </p>
+        <!-- odstraněn subtitle -->
       </div>
 
       <div class="services-grid">
@@ -474,15 +465,13 @@
       <div class="section-header">
         <div class="section-eyebrow">Realizace</div>
         <h2 class="section-title">Ukázky práce</h2>
-        <p class="section-subtitle">
-          Fotky z realizací. Kliknutím otevřete celou galerii.
-        </p>
+        <!-- odstraněn subtitle -->
       </div>
 
       <div class="gallery-shell">
         <div class="gallery-caption-top">
           <div id="gallery-job">Realizace</div>
-          <p id="gallery-text">Přejeďte myší – slideshow se zpomalí a fotka pod kurzorem se zvýrazní.</p>
+          <p id="gallery-text"></p>
         </div>
 
         <div class="gallery-viewer">
@@ -490,9 +479,7 @@
             <div class="gallery-track" id="gallery-track"></div>
           </div>
 
-          <div class="gallery-caption-side">
-            Jedna galerie se všemi fotkami (1–15). Hover slideshow zpomalí a zvětší fotku pod kurzorem.
-          </div>
+          <div class="gallery-caption-side"></div>
         </div>
 
         <div class="gallery-footer">
@@ -512,7 +499,7 @@
       <div class="modal-header">
         <div>
           <h3>Galerie</h3>
-          <small>Všechny fotky.</small>
+          <small></small>
         </div>
         <button class="modal-close" type="button" onclick="closeGallery()">×</button>
       </div>
@@ -640,19 +627,19 @@
       }
     }
 
-    /* === JEDNA GALERIE – fotky/1.jpeg až fotky/15.jpeg === */
+    /* === JEDNA GALERIE – fotky/1.jpeg až fotky/15.jpeg (bez textů) === */
     const slidesData = Array.from({ length: 15 }, (_, i) => {
       const n = i + 1;
       return {
         src: `fotky/${n}.jpeg`,
         alt: `Realizace – foto ${n}`,
         title: "Realizace",
-        text: `Fotografie realizace č. ${n}.`
+        text: "" // ✅ žádný text
       };
     });
 
-    let SPEED = 0.25;        // default
-    const SLOW_SPEED = 0.08; // při hoveru
+    let SPEED = 0.25;
+    const SLOW_SPEED = 0.08;
     const FAST_SPEED = 0.25;
 
     const track = document.getElementById("gallery-track");
@@ -718,7 +705,9 @@
 
       const s = slidesData[centerIndex];
       jobEl.textContent = s.title;
-      textEl.textContent = s.text;
+
+      // ✅ žádný text
+      if (textEl) textEl.textContent = "";
 
       dots.forEach((d, i) => d.classList.toggle("active", i === centerIndex));
 
@@ -757,7 +746,7 @@
       if (prevStep && slideStep) offsetX = offsetX * (slideStep / prevStep);
     });
 
-    // FULL GALLERY MODAL (jedna galerie)
+    // FULL GALLERY MODAL
     function openGallery() {
       modalGrid.innerHTML = "";
       slidesData.forEach((s) => {
@@ -772,7 +761,7 @@
 
       modal.classList.add("open");
 
-      // ✅ zamkne scroll bez "cuknutí" do strany
+      // zamkne scroll bez posunu do strany
       const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
       document.body.style.overflow = "hidden";
       document.body.style.paddingRight = scrollbarWidth + "px";
