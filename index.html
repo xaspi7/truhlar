@@ -16,7 +16,7 @@
       --text-main:#e5e7eb;
       --text-muted:#9ca3af;
 
-      /* ✅ ZELENÝ AKCENT (místo oranžové) */
+      /* ZELENÝ AKCENT */
       --accent:#22c55e;
       --accent-soft:rgba(34,197,94,.25);
 
@@ -51,10 +51,7 @@
     .brand{display:flex;align-items:center;gap:10px;font-size:.9rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
     .brand-mark{
       width:30px;height:30px;border-radius:999px;
-
-      /* ✅ zelený “medailonek” */
       background:conic-gradient(from 220deg,#22c55e,#4ade80,#86efac,#22c55e);
-
       display:flex;align-items:center;justify-content:center;
       color:#020617;font-size:.8rem;font-weight:800;
       box-shadow:0 12px 30px rgba(0,0,0,.9)
@@ -107,17 +104,18 @@
     }
 
     .hero-media{
-      background:var(--bg-card);border-radius:var(--radius-lg);padding:18px;border:1px solid #1f2937;
+      background:linear-gradient(180deg,rgba(17,24,39,.92),rgba(2,6,23,.98));
+      border-radius:var(--radius-lg);
+      padding:18px;
+      border:1px solid rgba(148,163,184,.16);
       box-shadow:var(--shadow-soft)
     }
     .hero-photo{border-radius:14px;overflow:hidden;background:#020617;height:260px;position:relative}
     .hero-photo img{width:100%;height:100%;object-fit:cover}
-    .hero-badge{
-      position:absolute;left:16px;bottom:16px;padding:8px 12px;border-radius:999px;
-      background:rgba(15,23,42,.92);display:inline-flex;align-items:center;gap:8px;
-      border:1px solid rgba(148,163,184,.7);font-size:.75rem;backdrop-filter:blur(12px)
-    }
-    .hero-badge-dot{width:10px;height:10px;border-radius:999px;background:#22c55e;box-shadow:0 0 0 4px rgba(34,197,94,.35)}
+
+    /* ✅ badge text pryč */
+    .hero-badge{display:none}
+
     .hero-stats{
       margin-top:16px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;
       font-size:.8rem;color:var(--text-muted)
@@ -130,25 +128,78 @@
     .section-header{max-width:720px;margin-bottom:34px}
     .section-eyebrow{text-transform:uppercase;letter-spacing:.22em;font-size:.75rem;color:var(--text-muted);margin-bottom:8px}
     .section-title{font-size:1.8rem;margin:0 0 4px}
-    .section-subtitle{font-size:.95rem;color:var(--text-muted);margin:0}
 
-    /* SERVICES */
+    /* =========================
+       ✅ NOVÝ VZHLED SLUŽEB
+       ========================= */
     #sluzby{background:radial-gradient(circle at top,#020617 0,#020617 35%,#020617 100%)}
-    .services-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+    .services-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:16px
+    }
+
+    /* nový design: icon + jemný gradient border + “glass” */
     .service-card{
-      background:var(--bg-card);border-radius:20px;padding:18px 18px 22px;border:1px solid #1f2937;
-      box-shadow:0 18px 42px rgba(0,0,0,.85);position:relative;overflow:hidden;
-      transition:transform .12s ease-out,box-shadow .12s ease-out,border-color .12s ease-out,background .12s ease-out
+      position:relative;
+      border-radius:18px;
+      padding:16px 16px 18px;
+      background:linear-gradient(180deg,rgba(17,24,39,.78),rgba(2,6,23,.92));
+      border:1px solid rgba(148,163,184,.16);
+      box-shadow:0 14px 34px rgba(0,0,0,.6);
+      overflow:hidden;
+      transition:transform .14s ease-out, box-shadow .14s ease-out, border-color .14s ease-out;
+      min-height:156px;
     }
+
+    /* jemný “akcent ring” */
     .service-card::before{
-      content:"";position:absolute;inset:0;height:4px;
-      /* ✅ zelený proužek */
-      background:linear-gradient(90deg,#22c55e,#4ade80,#86efac);
+      content:"";
+      position:absolute;
+      inset:-1px;
+      border-radius:18px;
+      padding:1px;
+      background:linear-gradient(135deg,rgba(34,197,94,.65),rgba(34,197,94,0),rgba(148,163,184,.25));
+      -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+      -webkit-mask-composite:xor;
+      mask-composite:exclude;
+      pointer-events:none;
+      opacity:.9;
     }
-    .service-card:hover{transform:translateY(-3px);border-color:#4b5563;background:var(--bg-card-soft);box-shadow:0 22px 52px rgba(0,0,0,.95)}
-    .service-label{margin-top:8px;font-size:.7rem;text-transform:uppercase;letter-spacing:.16em;color:var(--text-muted)}
-    .service-title{margin:4px 0 4px;font-size:1.05rem}
-    .service-desc{margin:0;font-size:.9rem;color:#d1d5db}
+
+    /* ikonový “chip” */
+    .service-icon{
+      width:38px;height:38px;border-radius:12px;
+      display:flex;align-items:center;justify-content:center;
+      background:rgba(34,197,94,.14);
+      border:1px solid rgba(34,197,94,.35);
+      box-shadow:0 0 0 4px rgba(34,197,94,.08);
+      margin-bottom:10px;
+      font-size:18px;
+      line-height:1;
+    }
+
+    .service-title{
+      margin:0 0 6px;
+      font-size:1.02rem;
+      font-weight:600;
+      letter-spacing:.01em;
+    }
+
+    .service-desc{
+      margin:0;
+      font-size:.92rem;
+      color:#cbd5e1;
+      line-height:1.55;
+    }
+
+    .service-card:hover{
+      transform:translateY(-3px);
+      border-color:rgba(34,197,94,.45);
+      box-shadow:0 18px 46px rgba(0,0,0,.75);
+    }
 
     /* REALIZACE */
     #realizace{background:radial-gradient(circle at top,#020617 0,#020617 40%,#020617 100%)}
@@ -156,7 +207,6 @@
       border-radius:var(--radius-lg);padding:20px 20px 22px;background:var(--bg-card);
       border:1px solid #1f2937;box-shadow:var(--shadow-soft)
     }
-
     .gallery-caption-top{text-align:center;margin-bottom:10px}
     #gallery-job{
       display:inline-block;padding:4px 12px;border-radius:999px;background:#020617;border:1px solid #374151;
@@ -164,44 +214,21 @@
     }
     #gallery-job.glow{box-shadow:0 0 0 3px var(--accent-soft);border-color:var(--accent)}
     #gallery-text{display:none}
-
-    .gallery-viewer{
-      margin-top:12px;
-      display:grid;
-      grid-template-columns:minmax(0,1fr);
-      gap:16px;
-      align-items:stretch
-    }
-
+    .gallery-viewer{margin-top:12px;display:grid;grid-template-columns:minmax(0,1fr);gap:16px;align-items:stretch}
     .gallery-image-wrapper{
       border-radius:16px;background:#020617;border:1px solid #1f2937;padding:8px 0;overflow:hidden;position:relative;height:320px;
       box-shadow:0 18px 40px rgba(0,0,0,.9);display:flex;align-items:center;justify-content:center;
-      cursor:pointer;
-      transition:box-shadow .3s ease,border-color .3s ease
+      cursor:pointer;transition:box-shadow .3s ease,border-color .3s ease
     }
     .gallery-image-wrapper.glow{box-shadow:0 0 0 3px var(--accent-soft),0 22px 50px rgba(0,0,0,.95);border-color:var(--accent)}
     .gallery-track{height:100%;display:flex;gap:8px;will-change:transform}
-
-    .gallery-slide{
-      flex:0 0 260px;max-width:260px;height:100%;
-      display:flex;align-items:center;justify-content:center;
-      transition:transform .18s ease-out;
-      transform-origin:center center;
-    }
-    .gallery-slide img{
-      width:100%;height:100%;object-fit:cover;border-radius:12px;
-      transition:transform .18s ease-out;
-      will-change:transform;
-    }
+    .gallery-slide{flex:0 0 260px;max-width:260px;height:100%;display:flex;align-items:center;justify-content:center;transition:transform .18s ease-out}
+    .gallery-slide img{width:100%;height:100%;object-fit:cover;border-radius:12px;transition:transform .18s ease-out;will-change:transform}
     .gallery-slide:hover img{transform:scale(1.06)}
     .gallery-caption-side{display:none}
-
     .gallery-footer{margin-top:12px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
     .gallery-dots{display:flex;gap:6px;align-items:center}
-    .gallery-dot{
-      width:8px;height:8px;border-radius:999px;background:#1f2937;box-shadow:0 0 0 1px #374151;
-      opacity:.4;transition:.18s
-    }
+    .gallery-dot{width:8px;height:8px;border-radius:999px;background:#1f2937;box-shadow:0 0 0 1px #374151;opacity:.4;transition:.18s}
     .gallery-dot.active{width:12px;height:12px;opacity:1;background:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
     .gallery-full-btn{
       border-radius:999px;padding:7px 14px;font-size:.84rem;border:1px solid #4b5563;background:#020617;color:#e5e7eb;
@@ -213,66 +240,26 @@
     .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:80}
     .modal.open{display:flex}
     .modal-backdrop{position:absolute;inset:0;background:rgba(15,23,42,.85);backdrop-filter:blur(6px)}
-
     .modal-content{
-      position:relative;
-      max-width:1000px;
-      width:92%;
-      height:86vh;
-      background:#020617;
-      border-radius:20px;
-      border:1px solid #4b5563;
-      box-shadow:0 24px 70px rgba(0,0,0,.95);
-      padding:18px;
-      z-index:1;
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-      overflow:hidden;
+      position:relative;max-width:1000px;width:92%;height:86vh;background:#020617;border-radius:20px;border:1px solid #4b5563;
+      box-shadow:0 24px 70px rgba(0,0,0,.95);padding:18px;z-index:1;display:flex;flex-direction:column;gap:12px;overflow:hidden
     }
-
     .modal-header{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-bottom:8px;border-bottom:1px solid #1f2937}
     .modal-header h3{margin:0;font-size:1.1rem}
     .modal-header small{display:none}
-    .modal-close{
-      border-radius:999px;border:1px solid #4b5563;background:#020617;color:#e5e7eb;width:28px;height:28px;cursor:pointer;
-      display:inline-flex;align-items:center;justify-content:center;font-size:1rem
-    }
-
+    .modal-close{border-radius:999px;border:1px solid #4b5563;background:#020617;color:#e5e7eb;width:28px;height:28px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-size:1rem}
     .modal-grid{
-      flex:1;
-      overflow-y:auto;
-      overflow-x:hidden;
-      padding-right:10px;
-      box-sizing:border-box;
-      scrollbar-gutter: stable both-edges;
-
-      column-count:4;
-      column-gap:12px;
+      flex:1;overflow-y:auto;overflow-x:hidden;padding-right:10px;box-sizing:border-box;scrollbar-gutter: stable both-edges;
+      column-count:4;column-gap:12px
     }
     @media (max-width: 980px){ .modal-grid{ column-count:3; } }
     @media (max-width: 720px){ .modal-grid{ column-count:2; } }
     @media (max-width: 520px){ .modal-grid{ column-count:1; } }
-
     .modal-thumb{
-      break-inside: avoid;
-      -webkit-column-break-inside: avoid;
-      page-break-inside: avoid;
-
-      margin:0 0 12px;
-      border-radius:12px;
-      border:1px solid #1f2937;
-      background:#000;
-      padding:8px;
-      overflow:hidden;
+      break-inside: avoid;-webkit-column-break-inside: avoid;page-break-inside: avoid;
+      margin:0 0 12px;border-radius:12px;border:1px solid #1f2937;background:#000;padding:8px;overflow:hidden
     }
-    .modal-thumb img{
-      width:100%;
-      height:auto;
-      object-fit:contain;
-      border-radius:10px;
-      display:block;
-    }
+    .modal-thumb img{width:100%;height:auto;object-fit:contain;border-radius:10px;display:block}
 
     /* ABOUT */
     .about-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:28px;align-items:flex-start}
@@ -337,7 +324,6 @@
 </head>
 
 <body>
-  <!-- NAVBAR -->
   <header class="navbar">
     <div class="navbar-inner">
       <div class="brand">
@@ -366,7 +352,6 @@
     </div>
   </header>
 
-  <!-- HERO -->
   <section id="uvod" class="hero">
     <div class="container">
       <div class="hero-grid">
@@ -392,10 +377,6 @@
         <aside class="hero-media">
           <div class="hero-photo">
             <img src="fotky/1.jpeg" alt="Truhlářství – ukázka práce" />
-            <div class="hero-badge">
-              <span class="hero-badge-dot"></span>
-              Zaměření i montáž osobně
-            </div>
           </div>
 
           <div class="hero-stats">
@@ -427,37 +408,37 @@
 
       <div class="services-grid">
         <article class="service-card">
-          <div class="service-label">Kuchyně</div>
+          <div class="service-icon">🧰</div>
           <h3 class="service-title">Kuchyně na míru</h3>
           <p class="service-desc">Návrh, výroba i montáž – praktické řešení podle prostoru.</p>
         </article>
 
         <article class="service-card">
-          <div class="service-label">Vestavby</div>
+          <div class="service-icon">🚪</div>
           <h3 class="service-title">Vestavné skříně a šatny</h3>
           <p class="service-desc">Řešení do nik, pod schody, do podkroví.</p>
         </article>
 
         <article class="service-card">
-          <div class="service-label">Dřevo</div>
+          <div class="service-icon">🪵</div>
           <h3 class="service-title">Masiv &amp; dýha</h3>
           <p class="service-desc">Stoly, lavice, parapety, police – povrch dle použití.</p>
         </article>
 
         <article class="service-card">
-          <div class="service-label">Interiér</div>
+          <div class="service-icon">🧱</div>
           <h3 class="service-title">Obklady a lamely</h3>
           <p class="service-desc">Stěnové obklady, lamely, zakrytí detailů a techniky.</p>
         </article>
 
         <article class="service-card">
-          <div class="service-label">Dveře</div>
+          <div class="service-icon">🛞</div>
           <h3 class="service-title">Posuvné systémy</h3>
           <p class="service-desc">Posuvy do pouzdra i na stěnu, šatní dveře, zástěny.</p>
         </article>
 
         <article class="service-card">
-          <div class="service-label">Servis</div>
+          <div class="service-icon">🔧</div>
           <h3 class="service-title">Opravy a úpravy nábytku</h3>
           <p class="service-desc">Seřízení dvířek, výměna kování, doplnění polic.</p>
         </article>
@@ -483,8 +464,6 @@
           <div class="gallery-image-wrapper" id="gallery-wrapper" title="Kliknutím otevřete celou galerii">
             <div class="gallery-track" id="gallery-track"></div>
           </div>
-
-          <div class="gallery-caption-side"></div>
         </div>
 
         <div class="gallery-footer">
@@ -497,15 +476,12 @@
     </div>
   </section>
 
-  <!-- MODAL – plná galerie -->
+  <!-- MODAL -->
   <div class="modal" id="gallery-modal">
     <div class="modal-backdrop" onclick="closeGallery()"></div>
     <div class="modal-content">
       <div class="modal-header">
-        <div>
-          <h3>Galerie</h3>
-          <small></small>
-        </div>
+        <div><h3>Galerie</h3></div>
         <button class="modal-close" type="button" onclick="closeGallery()">×</button>
       </div>
       <div class="modal-grid" id="modal-grid"></div>
@@ -581,13 +557,20 @@
               ></textarea>
             </div>
             <button class="btn-primary" type="submit">Odeslat</button>
+            <div class="contact-note">Ozvu se zpravidla do dvou pracovních dnů.</div>
           </form>
+        </div>
+
+        <div>
+          <p class="contact-side-note">
+            Pro rychlejší odhad pošlete fotku prostoru + přibližné rozměry. U kuchyní ideálně i půdorys.
+            Větší zakázky vždy předchází zaměření na místě.
+          </p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     <div class="container footer-inner">
       <div>&copy; <span id="year"></span> Truhlářství – všechna práva vyhrazena.</div>
@@ -624,15 +607,9 @@
       }
     }
 
-    /* === JEDNA GALERIE – fotky/1.jpeg až fotky/15.jpeg (bez textů) === */
     const slidesData = Array.from({ length: 15 }, (_, i) => {
       const n = i + 1;
-      return {
-        src: `fotky/${n}.jpeg`,
-        alt: `Realizace – foto ${n}`,
-        title: "Realizace",
-        text: ""
-      };
+      return { src: `fotky/${n}.jpeg`, alt: `Realizace – foto ${n}` };
     });
 
     let SPEED = 0.25;
